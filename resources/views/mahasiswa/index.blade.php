@@ -23,39 +23,45 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 border">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">NIM</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Nama</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Prodi</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse ($mahasiswa as $mhs)
-                        <tr>
-                            <td class="px-4 py-2">{{ $mhs->nim }}</td>
-                            <td class="px-4 py-2">{{ $mhs->nama }}</td>
-                            <td class="px-4 py-2">{{ $mhs->program_studi }}</td>
-                            <td class="px-4 py-2">{{ $mhs->email }}</td>
-                            <td class="px-4 py-2 flex space-x-2">
-                                <a href="{{ route('mahasiswa.edit', $mhs->id) }}" class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Edit</a>
-                                <form action="{{ route('mahasiswa.destroy', $mhs->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="px-4 py-4 text-center text-gray-500">Belum ada data mahasiswa.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <table class="w-full text-left border-collapse">
+    <thead>
+        <tr class="border-b">
+            <th class="p-2">NIM</th>
+            <th class="p-2">NAMA</th>
+            <th class="p-2">TEMPAT LAHIR</th>
+            <th class="p-2">TANGGAL LAHIR</th>
+            <th class="p-2">JK</th>
+            <th class="p-2">ALAMAT</th>
+            <th class="p-2">PRODI</th>
+            <th class="p-2">NO HP</th>
+            <th class="p-2">EMAIL</th>
+            <th class="p-2">AKSI</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($mahasiswa as $mhs)
+        <tr class="border-b">
+            <td class="p-2">{{ $mhs->nim }}</td>
+            <td class="p-2">{{ $mhs->nama }}</td>
+            <td class="p-2">{{ $mhs->tempat_lahir }}</td>
+            <td class="p-2">{{ $mhs->tanggal_lahir }}</td>
+            <td class="p-2">{{ $mhs->jenis_kelamin }}</td>
+            <td class="p-2">{{ $mhs->alamat }}</td>
+            <td class="p-2">{{ $mhs->program_studi }}</td>
+            <td class="p-2">{{ $mhs->no_hp }}</td>
+            <td class="p-2">{{ $mhs->email }}</td>
+            <td class="p-2">
+                <a href="{{ route('mahasiswa.edit', $mhs->id) }}" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</a>
+                <form action="{{ route('mahasiswa.destroy', $mhs->id) }}" method="POST" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-600 text-white px-2 py-1 rounded" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
         </div>
 
         <div class="mt-4">

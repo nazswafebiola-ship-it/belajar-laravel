@@ -21,7 +21,7 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nim'           => 'required|unique:mahasiswas,nim',
+            'nim'           => 'required|unique:mahasiswa,nim',
             'nama'          => 'required|string|max:255',
             'tempat_lahir'  => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
@@ -29,7 +29,7 @@ class MahasiswaController extends Controller
             'alamat'        => 'required|string',
             'program_studi' => 'required|string|max:255',
             'no_hp'         => 'required|numeric',
-            'email'         => 'required|email|unique:mahasiswas,email',
+            'email'         => 'required|email|unique:mahasiswa,email',
         ]);
 
         Mahasiswa::create($request->all());
@@ -45,7 +45,7 @@ class MahasiswaController extends Controller
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
         $request->validate([
-            'nim'           => 'required|unique:mahasiswas,nim,' . $mahasiswa->id,
+            'nim'           => 'required|unique:mahasiswa,nim,' . $mahasiswa->id,
             'nama'          => 'required|string|max:255',
             'tempat_lahir'  => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
@@ -53,7 +53,7 @@ class MahasiswaController extends Controller
             'alamat'        => 'required|string',
             'program_studi' => 'required|string|max:255',
             'no_hp'         => 'required|numeric',
-            'email'         => 'required|email|unique:mahasiswas,email,' . $mahasiswa->id,
+            'email'         => 'required|email|unique:mahasiswa,email,' . $mahasiswa->id,
         ]);
 
         $mahasiswa->update($request->all());
